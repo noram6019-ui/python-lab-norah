@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+
+      <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>منصة نوره الصحفي لتعلم البايثون</title>
   <script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
   <style>
@@ -13,20 +14,19 @@
     header:after{content:"🐍";position:absolute;left:35px;top:20px;font-size:95px;opacity:.16}
     header h1{margin:0 0 10px;font-size:42px}
     header p{margin:7px 0;font-size:18px;line-height:1.8}
-    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
-    .tab{background:white;color:#312e81;border:1px solid #dbe3ff;border-radius:16px;padding:13px 18px;font-weight:bold;cursor:pointer}
-    .tab.active{background:#5b21b6;color:white}
     .card{background:white;border-radius:24px;padding:20px;box-shadow:0 12px 28px #0001;border:1px solid #e8ecff;margin-bottom:18px}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
     label{font-weight:bold;display:block;margin-bottom:7px;color:#26345f}
-    input,textarea,select{width:100%;border:1px solid #d7ddf5;border-radius:14px;padding:12px;margin-bottom:12px;font-size:15px;background:#fbfcff}
-    textarea{height:330px;direction:ltr;text-align:left;background:#101827;color:#d1fae5;font-family:Consolas,monospace;line-height:1.6;resize:vertical}
+    input,textarea{width:100%;border:1px solid #d7ddf5;border-radius:14px;padding:12px;margin-bottom:12px;font-size:15px;background:#fbfcff}
+    textarea{height:320px;direction:ltr;text-align:left;background:#101827;color:#d1fae5;font-family:Consolas,monospace;line-height:1.6;resize:vertical}
     button{border:0;border-radius:14px;padding:12px 16px;margin:5px 3px;font-weight:bold;cursor:pointer;font-size:14px;transition:.2s}
     button:hover{transform:translateY(-2px);box-shadow:0 8px 18px #0002}
+    .tab{background:white;color:#312e81;border:1px solid #dbe3ff}.active{background:#5b21b6;color:white}
     .run{background:#16a34a;color:white}.clear{background:#dc2626;color:white}.lesson{background:#2563eb;color:white}.print{background:#7c3aed;color:white}.cert{background:#f59e0b;color:white}.check{background:#0891b2;color:white}
-    .output{background:#111827;color:#d1fae5;border-radius:16px;min-height:130px;padding:15px;white-space:pre-wrap;direction:ltr;text-align:left;font-family:Consolas,monospace}
+    .output{background:#111827;color:#d1fae5;border-radius:16px;min-height:130px;padding:15px;white-space:pre-wrap;direction:ltr;text-align:left;font-family:Consolas,monospace;overflow:auto}
     canvas{width:100%;height:420px;background:white;border:2px dashed #c7d2fe;border-radius:18px}
     .hint{background:#eef2ff;border-radius:16px;padding:14px;line-height:1.8;color:#334155;margin-top:12px}
+    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
     .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
     .stat{background:linear-gradient(135deg,#fff,#eef2ff);border-radius:18px;padding:16px;text-align:center;border:1px solid #e0e7ff}
     .stat b{font-size:26px;color:#5b21b6}
@@ -35,7 +35,7 @@
     .certificate h2{font-size:34px;color:#92400e;margin-bottom:10px}
     .certificate p{font-size:20px;line-height:1.9}
     @media(max-width:850px){.grid,.stats{grid-template-columns:1fr}header h1{font-size:30px}}
-    @media print{.tabs,button,textarea,input,.hint{display:none}.card,header{box-shadow:none}.certificate{display:block}}
+    @media print{.tabs,button,textarea,input,.hint,.stats{display:none}.card,header{box-shadow:none}.certificate{display:block}}
   </style>
 </head>
 <body>
@@ -69,34 +69,33 @@
       <button class="tab active" id="pythonTab" onclick="showSection('python')">💻 تشغيل بايثون</button>
       <button class="tab" id="drawTab" onclick="showSection('draw')">🎨 الرسم البرمجي</button>
       <button class="tab" id="challengeTab" onclick="showSection('challenge')">🏆 التحديات</button>
-      <button class="tab" id="certTab" onclick="showSection('certificate')">📜 الشهادة</button>
+      <button class="tab" id="certTab" onclick="showSection('cert')">📜 الشهادة</button>
     </div>
 
     <section id="pythonSection" class="grid">
       <div class="card">
-        <h2>💻 محرر أكواد Python الحقيقي</h2>
+        <h2>💻 محرر أكواد Python</h2>
         <textarea id="pythonCode">print("مرحباً بك في منصة نوره الصحفي")
 name = "طالبة مبدعة"
-print("أتعلم البايثون بثقة")
-print("اسمي:", name)</textarea>
+print("اسمي:", name)
+print(5 + 7)</textarea>
         <button class="run" onclick="runPythonCode()">▶ تشغيل الكود</button>
         <button class="lesson" onclick="pythonLesson('print')">درس الطباعة</button>
         <button class="lesson" onclick="pythonLesson('variables')">درس المتغيرات</button>
         <button class="lesson" onclick="pythonLesson('if')">درس الشروط</button>
         <button class="clear" onclick="clearPythonOutput()">🧹 مسح</button>
-        <div class="hint">هذا القسم يشغل أكواد Python النصية مثل print والمتغيرات والعمليات الحسابية والشروط والحلقات.</div>
+        <div class="hint">يدعم هذا القسم أوامر Python الأساسية مثل print والمتغيرات والعمليات الحسابية والشروط والحلقات.</div>
       </div>
       <div class="card">
         <h2>📺 نتيجة كود Python</h2>
-        <div id="pythonOutput" class="output">جاري تجهيز مشغل Python...</div>
+        <div id="pythonOutput" class="output">جاري تجهيز مشغل Python... انتظري قليلاً.</div>
       </div>
     </section>
 
     <section id="drawSection" class="grid hidden">
       <div class="card">
         <h2>🎨 محرر الرسم البرمجي</h2>
-        <textarea id="drawCode"># ارسمي مربعاً بأوامر تشبه turtle
-color("#6d28d9")
+        <textarea id="drawCode">color("#6d28d9")
 width(4)
 forward(120)
 right(90)
@@ -110,7 +109,7 @@ forward(120)</textarea>
         <button class="lesson" onclick="starExample()">☆ نجمة</button>
         <button class="lesson" onclick="flowerExample()">✿ وردة</button>
         <button class="clear" onclick="clearCanvas()">🧹 مسح</button>
-        <div class="hint"><b>الأوامر المدعومة:</b><br>forward(100)، right(90)، left(90)، color("red")، width(4)، circle(60)، penup()، pendown()</div>
+        <div class="hint"><b>أوامر الرسم:</b><br>forward(100)، right(90)، left(90)، color("red")، width(4)، circle(60)، penup()، pendown()</div>
       </div>
       <div class="card">
         <h2>🖼️ لوحة الرسم</h2>
@@ -122,14 +121,14 @@ forward(120)</textarea>
 
     <section id="challengeSection" class="card hidden">
       <h2>🏆 تحديات بايثون</h2>
-      <p><b>التحدي 1:</b> اكتبي كود يطبع اسمك باستخدام print.</p>
+      <p><b>التحدي:</b> اكتبي كود يطبع اسمك باستخدام print.</p>
       <textarea id="challengeCode">print("اسمي نوره")</textarea>
       <button class="check" onclick="checkChallenge()">✅ تحقق من الحل</button>
       <button class="lesson" onclick="document.getElementById('challengeCode').value='name = \"نوره\"\nprint(name)'">مثال مساعد</button>
       <div id="challengeOutput" class="output">اكتبي الحل ثم اضغطي تحقق.</div>
     </section>
 
-    <section id="certificateSection" class="card hidden">
+    <section id="certSection" class="card hidden">
       <h2>📜 شهادة الإنجاز</h2>
       <p>بعد تجربة الكود والرسم، يمكن للطالبة الحصول على شهادة إنجاز.</p>
       <button class="cert" onclick="makeCertificate()">إنشاء الشهادة</button>
@@ -145,10 +144,16 @@ forward(120)</textarea>
   </main>
 
 <script>
-let points = 0, tasks = 0;
-function addPoints(n){points += n; tasks += 1; document.getElementById('points').innerText=points; document.getElementById('tasks').innerText=tasks;}
+let points = 0;
+let tasks = 0;
+function addPoints(n){
+  points += n;
+  tasks += 1;
+  document.getElementById('points').innerText = points;
+  document.getElementById('tasks').innerText = tasks;
+}
 function showSection(name){
-  ['python','draw','challenge','certificate'].forEach(s=>{
+  ['python','draw','challenge','cert'].forEach(s=>{
     document.getElementById(s+'Section').classList.add('hidden');
     document.getElementById(s+'Tab').classList.remove('active');
   });
@@ -156,67 +161,91 @@ function showSection(name){
   document.getElementById(name+'Tab').classList.add('active');
 }
 
-let pyodide;
+let pyodide = null;
+let pyodideReady = false;
 async function initPyodide(){
   try{
     pyodide = await loadPyodide();
+    pyodideReady = true;
     document.getElementById('pythonOutput').innerText = 'تم تجهيز مشغل Python ✅';
   }catch(e){
-    document.getElementById('pythonOutput').innerText = 'تعذر تحميل Python. تأكدي من اتصال الإنترنت.';
+    document.getElementById('pythonOutput').innerText = 'تعذر تحميل Python. تأكدي من اتصال الإنترنت ثم حدثي الصفحة.';
   }
 }
 initPyodide();
 
 async function runPythonCode(){
   const out = document.getElementById('pythonOutput');
-  if(!pyodide){out.innerText='انتظري قليلاً، مشغل Python ما زال يتحمل...';return;}
+  if(!pyodideReady){
+    out.innerText = 'مشغل Python ما زال يتحمل... انتظري قليلاً ثم اضغطي تشغيل مرة أخرى.';
+    return;
+  }
   const code = document.getElementById('pythonCode').value;
+  let printedText = '';
+  pyodide.setStdout({batched: (msg) => { printedText += msg + '\n'; }});
+  pyodide.setStderr({batched: (msg) => { printedText += msg + '\n'; }});
   try{
-    pyodide.runPython(`
-import sys, io
-sys.stdout = io.StringIO()
-`);
-    await pyodide.runPythonAsync(code);
-    const result = pyodide.runPython('sys.stdout.getvalue()');
-    out.innerText = result || 'تم التنفيذ بدون مخرجات.';
+    const result = await pyodide.runPythonAsync(code);
+    if(result !== undefined && result !== null){ printedText += result.toString(); }
+    out.innerText = printedText.trim() || 'تم التنفيذ بدون مخرجات.';
     addPoints(10);
-  }catch(e){out.innerText = 'يوجد خطأ في الكود:\n' + e.message;}
+  }catch(e){
+    out.innerText = 'يوجد خطأ في الكود:\n' + e.message;
+  }
 }
 function clearPythonOutput(){document.getElementById('pythonOutput').innerText='';}
 function pythonLesson(type){
   const code = document.getElementById('pythonCode');
-  if(type==='print') code.value='print("مرحباً")\nprint("أنا أتعلم البايثون")';
-  if(type==='variables') code.value='name = "سارة"\nage = 14\nprint("اسمي", name)\nprint("عمري", age)';
-  if(type==='if') code.value='score = 95\nif score >= 90:\n    print("ممتاز")\nelse:\n    print("حاولي مرة أخرى")';
+  if(type === 'print') code.value = 'print("مرحباً")\nprint("أنا أتعلم البايثون")';
+  if(type === 'variables') code.value = 'name = "سارة"\nage = 14\nprint("اسمي", name)\nprint("عمري", age)';
+  if(type === 'if') code.value = 'score = 95\nif score >= 90:\n    print("ممتاز")\nelse:\n    print("حاولي مرة أخرى")';
 }
 
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-let x,y,angle,penDown,lineColor,lineWidth;
-function resetPen(){x=canvas.width/2;y=canvas.height/2;angle=0;penDown=true;lineColor='#2563eb';lineWidth=3;}
-function clearCanvas(){ctx.clearRect(0,0,canvas.width,canvas.height);resetPen();document.getElementById('drawOutput').innerText='تم مسح اللوحة.';}
-function drawLineTo(nx,ny){if(penDown){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(nx,ny);ctx.strokeStyle=lineColor;ctx.lineWidth=lineWidth;ctx.lineCap='round';ctx.stroke();}x=nx;y=ny;}
-function forward(n){const rad=angle*Math.PI/180;drawLineTo(x+Math.cos(rad)*n,y+Math.sin(rad)*n)}
-function right(deg){angle+=deg} function left(deg){angle-=deg} function color(c){lineColor=c} function width(w){lineWidth=w} function penup(){penDown=false} function pendown(){penDown=true}
-function circle(r){ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.strokeStyle=lineColor;ctx.lineWidth=lineWidth;ctx.stroke();}
-function runDrawing(){clearCanvas();const code=document.getElementById('drawCode').value.replace(/#.*$/gm,'');try{Function('forward','right','left','color','width','penup','pendown','circle',code)(forward,right,left,color,width,penup,pendown,circle);document.getElementById('drawOutput').innerText='تم تنفيذ الرسم بنجاح ✅';addPoints(10);}catch(e){document.getElementById('drawOutput').innerText='يوجد خطأ في الرسم:\n'+e.message;}}
-function squareExample(){document.getElementById('drawCode').value='color("#6d28d9")\nwidth(5)\nforward(130)\nright(90)\nforward(130)\nright(90)\nforward(130)\nright(90)\nforward(130)'}
-function starExample(){document.getElementById('drawCode').value='color("#f59e0b")\nwidth(4)\nforward(150)\nright(144)\nforward(150)\nright(144)\nforward(150)\nright(144)\nforward(150)\nright(144)\nforward(150)'}
-function flowerExample(){document.getElementById('drawCode').value='color("#a855f7")\nwidth(3)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)'}
+let x, y, angle, penDown, lineColor, lineWidth;
+function resetPen(){x = canvas.width/2; y = canvas.height/2; angle = 0; penDown = true; lineColor = '#2563eb'; lineWidth = 3;}
+function clearCanvas(){ctx.clearRect(0,0,canvas.width,canvas.height); resetPen(); document.getElementById('drawOutput').innerText = 'تم مسح اللوحة.';}
+function drawLineTo(nx,ny){
+  if(penDown){
+    ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(nx,ny);
+    ctx.strokeStyle = lineColor; ctx.lineWidth = lineWidth; ctx.lineCap = 'round'; ctx.stroke();
+  }
+  x = nx; y = ny;
+}
+function forward(n){const rad = angle*Math.PI/180; drawLineTo(x+Math.cos(rad)*n, y+Math.sin(rad)*n);}
+function right(deg){angle += deg;} function left(deg){angle -= deg;} function color(c){lineColor = c;} function width(w){lineWidth = w;} function penup(){penDown = false;} function pendown(){penDown = true;}
+function circle(r){ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.strokeStyle=lineColor; ctx.lineWidth=lineWidth; ctx.stroke();}
+function runDrawing(){
+  clearCanvas();
+  const code = document.getElementById('drawCode').value.replace(/#.*$/gm,'');
+  try{
+    Function('forward','right','left','color','width','penup','pendown','circle', code)(forward,right,left,color,width,penup,pendown,circle);
+    document.getElementById('drawOutput').innerText = 'تم تنفيذ الرسم بنجاح ✅';
+    addPoints(10);
+  }catch(e){document.getElementById('drawOutput').innerText = 'يوجد خطأ في الرسم:\n' + e.message;}
+}
+function squareExample(){document.getElementById('drawCode').value='color("#6d28d9")\nwidth(5)\nforward(130)\nright(90)\nforward(130)\nright(90)\nforward(130)\nright(90)\nforward(130)';}
+function starExample(){document.getElementById('drawCode').value='color("#f59e0b")\nwidth(4)\nforward(150)\nright(144)\nforward(150)\nright(144)\nforward(150)\nright(144)\nforward(150)\nright(144)\nforward(150)';}
+function flowerExample(){document.getElementById('drawCode').value='color("#a855f7")\nwidth(3)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)';}
 resetPen();
 
 function checkChallenge(){
-  const code=document.getElementById('challengeCode').value;
-  const out=document.getElementById('challengeOutput');
-  if(code.includes('print(')){out.innerText='إجابة صحيحة ✅ استخدمتِ أمر print بنجاح. +20 نقطة';addPoints(20);}else{out.innerText='حاولي مرة أخرى: يجب استخدام أمر print لطباعة الاسم.';}
+  const code = document.getElementById('challengeCode').value;
+  const out = document.getElementById('challengeOutput');
+  if(code.includes('print(')){
+    out.innerText = 'إجابة صحيحة ✅ استخدمتِ أمر print بنجاح. +20 نقطة';
+    addPoints(20);
+  }else{
+    out.innerText = 'حاولي مرة أخرى: يجب استخدام أمر print لطباعة الاسم.';
+  }
 }
 function makeCertificate(){
-  const name=document.getElementById('student').value || 'الطالبة المبدعة';
-  document.getElementById('certName').innerText=name;
-  document.getElementById('certificateBox').style.display='block';
+  const name = document.getElementById('student').value || 'الطالبة المبدعة';
+  document.getElementById('certName').innerText = name;
+  document.getElementById('certificateBox').style.display = 'block';
   addPoints(5);
 }
 </script>
 </body>
 </html>
-
