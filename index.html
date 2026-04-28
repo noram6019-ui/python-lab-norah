@@ -1,336 +1,225 @@
 
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>منصة VISION 360 لتعلم البرمجة</title>
+  <title>معمل لغة البايثون</title>
   <style>
     *{box-sizing:border-box;margin:0;padding:0;font-family:Tahoma,Arial,sans-serif}
-    body{
-      min-height:100vh;
-      background:radial-gradient(circle at top right,#dbeafe 0,#f8fafc 35%,#eef2ff 100%);
-      color:#172033;
-      padding:22px;
-    }
-    .container{max-width:1200px;margin:auto}
-    .hero{
-      position:relative;
-      overflow:hidden;
-      background:linear-gradient(135deg,#0f172a,#312e81,#0e7490);
-      color:white;
-      border-radius:34px;
-      padding:42px 34px;
-      margin-bottom:24px;
-      box-shadow:0 24px 50px rgba(15,23,42,.22);
-    }
-    .hero:before{
-      content:"</>";
-      position:absolute;
-      left:34px;
-      top:6px;
-      font-size:150px;
-      font-weight:900;
-      opacity:.08;
-      direction:ltr;
-    }
-    .tag{
-      display:inline-block;
-      background:rgba(255,255,255,.16);
-      border:1px solid rgba(255,255,255,.25);
-      padding:9px 18px;
-      border-radius:999px;
-      margin-bottom:16px;
-      font-weight:bold;
-    }
-    h1{
-      font-size:clamp(34px,5vw,58px);
-      line-height:1.25;
-      margin-bottom:12px;
-      font-weight:900;
-      background:linear-gradient(90deg,#22c55e,#60a5fa,#c084fc,#facc15);
-      background-size:300% 300%;
-      -webkit-background-clip:text;
-      color:transparent;
-      animation:glow 5s ease infinite;
-    }
-    @keyframes glow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-    .hero p{font-size:20px;line-height:1.8;max-width:850px;color:#e0f2fe}
-    .teacher{
-      margin-top:18px;
-      display:inline-block;
-      background:rgba(255,255,255,.14);
-      padding:12px 20px;
-      border-radius:18px;
-      font-weight:bold;
-      font-size:18px;
-    }
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-    .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
-    .card{
-      background:rgba(255,255,255,.92);
-      border:1px solid #e0e7ff;
-      border-radius:26px;
-      padding:22px;
-      box-shadow:0 16px 35px rgba(15,23,42,.08);
-      margin-bottom:18px;
-    }
-    .mini{text-align:center;min-height:150px}
-    .mini .icon{font-size:40px;margin-bottom:10px}
-    h2{color:#312e81;margin-bottom:14px;font-size:26px}
-    h3{color:#0f172a;margin-bottom:8px;font-size:20px}
-    p,li{line-height:1.9;font-size:16px;color:#334155}
-    .lesson,.challenge{
-      background:linear-gradient(135deg,#ffffff,#f5f3ff);
-      border-right:6px solid #6d28d9;
-      border-radius:18px;
-      padding:16px;
-      margin-bottom:12px;
-    }
-    .challenge{border-right-color:#f59e0b;background:linear-gradient(135deg,#fff,#fff7ed)}
-    code{
-      display:inline-block;
-      direction:ltr;
-      background:#111827;
-      color:#d1fae5;
-      padding:5px 9px;
-      border-radius:8px;
-      margin:3px;
-      font-family:Consolas,monospace;
-    }
-    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    a.btn,button{
-      border:0;
-      border-radius:15px;
-      padding:12px 18px;
-      font-weight:bold;
-      text-decoration:none;
-      cursor:pointer;
-      display:inline-block;
-      font-size:15px;
-    }
-    .blue{background:#2563eb;color:white}.purple{background:#7c3aed;color:white}.green{background:#16a34a;color:white}.gold{background:#f59e0b;color:white}.red{background:#dc2626;color:white}.dark{background:#0f172a;color:white}
-    label{font-weight:bold;display:block;margin:12px 0 7px;color:#26345f}
-    input,textarea,select{
-      width:100%;
-      border:1px solid #cbd5e1;
-      border-radius:15px;
-      padding:13px;
-      font-size:16px;
-      background:#fbfcff;
-    }
-    textarea{min-height:135px;resize:vertical;line-height:1.7}
-    .codebox{direction:ltr;text-align:left;background:#101827;color:#d1fae5;font-family:Consolas,monospace}
-    .note{background:#ecfeff;border:1px solid #bae6fd;border-radius:18px;padding:16px;color:#164e63;line-height:1.9;margin-top:10px}
-    .rubric{width:100%;border-collapse:collapse;margin-top:10px;overflow:hidden;border-radius:14px}
-    .rubric th,.rubric td{border:1px solid #e2e8f0;padding:12px;text-align:center}
-    .rubric th{background:#312e81;color:white}
-    .print-area{border:2px dashed #a5b4fc;background:white}
-    #imagePreview img{max-width:100%;border-radius:14px;margin-top:10px;border:1px solid #cbd5e1}
-    .certificate{
-      display:none;
-      text-align:center;
-      border:4px double #b45309;
-      background:#fffdf3;
-      border-radius:24px;
-      padding:30px;
-      margin-top:18px;
-    }
-    .certificate h2{font-size:36px;color:#92400e}
-    footer{text-align:center;padding:20px;color:#475569;font-weight:bold}
-    .page-title{display:none}
-    @media(max-width:900px){.grid,.cards3{grid-template-columns:1fr}.hero{padding:30px 22px}}
+    body{background:#e5e5e5;color:#222;padding:28px}
+    .page{max-width:980px;margin:auto;background:white;border:1px solid #cfcfcf;box-shadow:0 0 10px #0002;padding:60px 72px;min-height:1200px}
+    .top{text-align:center;margin-bottom:36px}
+    .logo{font-size:92px;line-height:1;margin-bottom:14px}
+    h1{font-size:30px;margin-bottom:12px;font-weight:800}
+    .desc{color:#666;line-height:1.8;font-size:14px}
+    .teacher{font-size:13px;color:#555;margin-top:5px}
+    h2{font-size:20px;margin:24px 0 12px;display:flex;align-items:center;gap:8px}
+    .grid{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:18px}
+    label{display:block;font-size:14px;margin-bottom:6px;color:#333}
+    input,textarea,select{width:100%;border:1px solid #d0d0d0;border-radius:7px;padding:10px;font-size:14px;background:white}
+    textarea{min-height:225px;direction:ltr;text-align:left;font-family:Consolas,monospace;line-height:1.6;resize:vertical}
+    .output{background:#111827;color:#d1fae5;border-radius:8px;padding:18px;min-height:165px;white-space:pre-wrap;direction:ltr;text-align:left;font-family:Consolas,monospace;line-height:1.7;overflow:auto}
+    .buttons{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 8px}
+    button{border:0;border-radius:8px;padding:10px 16px;font-weight:bold;cursor:pointer;font-size:14px}
+    .run{background:#16a34a;color:white}.clear{background:#dc2626;color:white}.example{background:#2563eb;color:white}.print{background:#6d28d9;color:white}.gray{background:#e5e7eb;color:#111}
+    .note{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;line-height:1.8;color:#475569;margin-top:12px;font-size:14px}
+    .upload{margin-top:18px}
+    #imagePreview img{max-width:100%;border:1px solid #ddd;border-radius:8px;margin-top:10px}
+    footer{display:flex;justify-content:space-between;color:#777;font-size:12px;margin-top:90px}
+    .print-title{display:none;text-align:center;margin-bottom:18px}
+    @media(max-width:800px){body{padding:10px}.page{padding:30px 18px}.grid{grid-template-columns:1fr}.logo{font-size:72px}}
     @media print{
-      body{background:white;padding:0;color:#000}
-      .hero,.no-print,footer{display:none!important}
-      .container{max-width:100%;margin:0}
-      .card{box-shadow:none;border:0;margin:0;padding:12px}
-      .print-area{border:2px solid #111;border-radius:0}
-      input,textarea,select{border:1px solid #555;background:white;color:#000}
-      .page-title{display:block;text-align:center;margin:10px 0 20px;color:#111}
-      #imagePreview img{max-height:320px;object-fit:contain}
+      body{background:white;padding:0}.page{border:0;box-shadow:none;max-width:100%;padding:28px}.buttons,.note .no-print{display:none!important}.print-title{display:block}textarea{min-height:170px}.output{color:white;background:#111827;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     }
   </style>
 </head>
 <body>
-  <main class="container">
-    <section class="hero">
-      <div class="tag">منصة تعليمية رقمية متكاملة</div>
-      <h1>🚀 منصة VISION 360 لتعلم البرمجة 🐍</h1>
-      <p>بيئة منظمة تجمع بين التعلم، التطبيق، التوثيق، والتقييم؛ حيث تتعلم الطالبة أساسيات Python، تنفذ الكود في محررات حقيقية، ثم توثق ناتجها وترفعه للطباعة بصيغة PDF.</p>
-      <div class="teacher">👩‍🏫 نوره الصحفي - متوسطة وثانوية أم الجرم 💻</div>
-    </section>
+  <main class="page">
+    <div class="top">
+      <div class="logo">🐍</div>
+      <h1>💻 معمل لغة البايثون</h1>
+      <p class="desc">بيئة تعليمية لتجربة أوامر بايثون الأساسية وورقة النتيجة مباشرة</p>
+      <p class="teacher">إعداد المعلمة: نوره الصحفي - متوسطة وثانوية أم الجرم</p>
+    </div>
 
-    <section class="cards3 no-print">
-      <div class="card mini">
-        <div class="icon">💻</div>
-        <h3>تشغيل حقيقي</h3>
-        <p>روابط مباشرة لمحررات Python موثوقة تعمل أونلاين.</p>
-      </div>
-      <div class="card mini">
-        <div class="icon">🎨</div>
-        <h3>رسم برمجي</h3>
-        <p>تطبيق مشاريع Turtle وإرفاق صورة الناتج داخل النموذج.</p>
-      </div>
-      <div class="card mini">
-        <div class="icon">📄</div>
-        <h3>PDF للتقييم</h3>
-        <p>تسليم منظم باسم الطالبة مع كود وصورة وملاحظات.</p>
-      </div>
-    </section>
-
-    <section class="card no-print">
-      <h2>🔗 بيئات التنفيذ المعتمدة</h2>
-      <p>تستخدم الطالبة هذه الروابط لتشغيل الكود فعليًا، ثم تعود للمنصة لتوثيق الحل ورفع صورة النتيجة.</p>
-      <div class="btns">
-        <a class="btn blue" href="https://trinket.io/python" target="_blank">فتح Python Trinket</a>
-        <a class="btn purple" href="https://trinket.io/turtle" target="_blank">فتح Turtle للرسم</a>
-        <a class="btn dark" href="https://replit.com/languages/python3" target="_blank">فتح Replit Python</a>
-      </div>
-      <div class="note">ميزة هذه الطريقة أنها ثابتة واحترافية: التنفيذ يتم في بيئة حقيقية، والمنصة تقوم بدور التعليم والتوثيق والتقييم.</div>
-    </section>
-
-    <section class="grid no-print">
-      <div class="card">
-        <h2>📚 مسار التعلم</h2>
-        <div class="lesson"><b>1. الطباعة</b><br><code>print("Hello")</code></div>
-        <div class="lesson"><b>2. المتغيرات</b><br><code>name = "Sara"</code> <code>print(name)</code></div>
-        <div class="lesson"><b>3. الشروط</b><br><code>if score >= 90:</code> <code>print("Excellent")</code></div>
-        <div class="lesson"><b>4. الرسم البرمجي</b><br><code>forward(100)</code> <code>right(90)</code></div>
-      </div>
-      <div class="card">
-        <h2>🏆 تحديات VISION 360</h2>
-        <div class="challenge"><b>التحدي 1:</b> برنامج يطبع اسم الطالبة وصفها وعبارة تحفيزية.</div>
-        <div class="challenge"><b>التحدي 2:</b> برنامج يستخدم متغيرين ويعرض ناتجًا.</div>
-        <div class="challenge"><b>التحدي 3:</b> رسم شكل باستخدام Turtle ورفع صورة الناتج.</div>
-        <div class="challenge"><b>التحدي 4:</b> شرح فكرة الكود بلغة الطالبة.</div>
-      </div>
-    </section>
-
-    <section class="card no-print">
-      <h2>📊 بطاقة تقييم مختصرة</h2>
-      <table class="rubric">
-        <tr><th>المعيار</th><th>ممتاز</th><th>جيد جدًا</th><th>يحتاج تحسين</th></tr>
-        <tr><td>صحة الكود</td><td>يعمل بلا أخطاء</td><td>أخطاء بسيطة</td><td>يحتاج مراجعة</td></tr>
-        <tr><td>توثيق الناتج</td><td>صورة/ناتج واضح</td><td>توثيق مقبول</td><td>غير مكتمل</td></tr>
-        <tr><td>شرح الفكرة</td><td>شرح واضح</td><td>شرح متوسط</td><td>شرح غير كافٍ</td></tr>
-      </table>
-    </section>
-
-    <section class="card print-area">
-      <h2 class="page-title">نموذج تسليم مهمة برمجية - منصة VISION 360</h2>
-      <h2>📝 نموذج حل الطالبة</h2>
+    <section>
+      <h2>📋 بيانات الطالبة</h2>
       <div class="grid">
         <div>
           <label>اسم الطالبة</label>
-          <input id="studentName" placeholder="اكتبي اسم الطالبة">
+          <input id="studentName" value="سلطان بندر المزروعي" />
         </div>
         <div>
           <label>الصف الدراسي</label>
-          <input id="studentClass" placeholder="مثال: ثالث متوسط">
+          <input id="studentClass" value="الثالث متوسط" />
         </div>
-      </div>
-
-      <label>نوع المهمة</label>
-      <select id="taskType">
-        <option>كود Python</option>
-        <option>رسم Turtle</option>
-        <option>تحدي برمجي</option>
-        <option>مشروع قصير</option>
-      </select>
-
-      <label>عنوان المهمة</label>
-      <input id="taskTitle" placeholder="مثال: برنامج يطبع بيانات الطالبة">
-
-      <label>الكود أو الحل البرمجي</label>
-      <textarea id="studentCode" class="codebox">name = "Sara"
-print("Student name:", name)
-print("I am learning Python")</textarea>
-
-      <label>الناتج بعد التشغيل</label>
-      <textarea id="resultText" placeholder="تكتب الطالبة هنا ناتج التشغيل أو وصف النتيجة"></textarea>
-
-      <label>رفع صورة للناتج أو الرسم</label>
-      <input type="file" id="resultImage" accept="image/*" onchange="previewImage(event)">
-      <div id="imagePreview"></div>
-
-      <label>شرح فكرة الحل</label>
-      <textarea id="projectDesc" placeholder="تشرح الطالبة هنا فكرة الكود أو الرسم"></textarea>
-
-      <label>تقييم المعلمة</label>
-      <select id="evaluation">
-        <option>ممتاز ⭐</option>
-        <option>جيد جدًا 👍</option>
-        <option>جيد 🙂</option>
-        <option>يحتاج تحسين ⚠️</option>
-      </select>
-
-      <label>ملاحظات المعلمة</label>
-      <textarea id="teacherNotes" placeholder="تكتب المعلمة ملاحظاتها هنا"></textarea>
-
-      <label>توقيع الطالبة</label>
-      <input id="studentSignature" placeholder="توقيع الطالبة">
-
-      <div class="btns no-print">
-        <button class="green" onclick="preparePrint()">🖨 طباعة الحل PDF</button>
-        <button class="blue" onclick="fillExample()">✨ تعبئة مثال</button>
-        <button class="gold" onclick="makeCertificate()">🏅 إنشاء شهادة</button>
-        <button class="red" onclick="clearForm()">🧹 مسح النموذج</button>
-      </div>
-
-      <div id="certificateBox" class="certificate">
-        <h2>🏅 شهادة إنجاز</h2>
-        <p>تُمنح هذه الشهادة للطالبة</p>
-        <p style="font-size:26px"><b id="certName">الطالبة المبدعة</b></p>
-        <p>لإتمامها مهمة برمجية ضمن منصة VISION 360 لتعلم البرمجة.</p>
-        <p><b>نوره الصحفي - متوسطة وثانوية أم الجرم</b></p>
       </div>
     </section>
 
-    <footer>👩‍🏫 نوره الصحفي - متوسطة وثانوية أم الجرم 💻</footer>
+    <section>
+      <h2>🧾 نافذة كتابة الكود (Python)</h2>
+      <textarea id="code">print('سلطان بندر وصل في العشرة')
+sultan_list=list(range(4,27,2))
+print('ثالث الأعداد الزوجية:', sultan_list)
+sport=['الهلال','الاتحاد','الأهلي']
+print('أنديه sport:',sport)
+sport[2]='النصر'
+print('بعد التعديل أنديه sport:',sport)
+print('العنصر الخامس من قائمة sultan',sultan_list[4])
+print('العنصر الثاني من sport:',sport[1])</textarea>
+
+      <div class="buttons">
+        <button class="run" onclick="runCode()">▶ تشغيل الكود</button>
+        <button class="example" onclick="example1()">مثال القوائم</button>
+        <button class="example" onclick="example2()">مثال الطباعة</button>
+        <button class="clear" onclick="clearAll()">مسح</button>
+        <button class="print" onclick="window.print()">طباعة PDF</button>
+      </div>
+
+      <div class="note">ملاحظة: هذا المعمل يعمل داخل المتصفح بدون مكتبات خارجية، ويدعم الأوامر التعليمية الأساسية: print، المتغيرات، النصوص، الأرقام، القوائم، range، list، وتعديل عناصر القائمة.</div>
+    </section>
+
+    <section>
+      <h2>🖥️ النتيجة النصية</h2>
+      <div id="output" class="output">اضغطي زر تشغيل الكود لعرض النتيجة هنا...</div>
+    </section>
+
+    <section class="upload">
+      <h2>🎨 نتيجة مشاريع الرسم</h2>
+      <label>رفع صورة ناتج الرسم أو المشروع</label>
+      <input type="file" accept="image/*" onchange="previewImage(event)">
+      <div id="imagePreview"></div>
+    </section>
+
+    <footer>
+      <span>https://sa-i.net/py</span>
+      <span>صفحة 1 من 1</span>
+    </footer>
   </main>
 
-  <script>
-    function preparePrint(){
-      const name = document.getElementById('studentName').value || 'طالبة';
-      document.title = 'حل مهمة برمجية - ' + name;
-      window.print();
-    }
+<script>
+function pyFormat(value){
+  if(Array.isArray(value)) return '[' + value.map(pyFormat).join(', ') + ']';
+  if(typeof value === 'string') return value;
+  return String(value);
+}
 
-    function previewImage(event){
-      const preview = document.getElementById('imagePreview');
-      preview.innerHTML = '';
-      const file = event.target.files[0];
-      if(file){
-        const img = document.createElement('img');
-        img.src = URL.createObjectURL(file);
-        preview.appendChild(img);
+function splitArgs(text){
+  const args=[]; let cur=''; let quote=null; let depth=0;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i];
+    if(quote){cur+=ch; if(ch===quote && text[i-1] !== '\\') quote=null; continue;}
+    if(ch==='"' || ch==="'"){quote=ch; cur+=ch; continue;}
+    if(ch==='[' || ch==='(') depth++;
+    if(ch===']' || ch===')') depth--;
+    if(ch===',' && depth===0){args.push(cur.trim()); cur=''; continue;}
+    cur+=ch;
+  }
+  if(cur.trim()) args.push(cur.trim());
+  return args;
+}
+
+function evalExpr(expr, vars){
+  expr = expr.trim();
+  if((expr.startsWith('"') && expr.endsWith('"')) || (expr.startsWith("'") && expr.endsWith("'"))) return expr.slice(1,-1);
+  if(/^-?\d+(\.\d+)?$/.test(expr)) return Number(expr);
+
+  let m = expr.match(/^list\(range\((.*)\)\)$/);
+  if(m){
+    const parts = splitArgs(m[1]).map(Number);
+    let start=0,end=0,step=1;
+    if(parts.length===1){end=parts[0];}
+    if(parts.length===2){start=parts[0];end=parts[1];}
+    if(parts.length===3){start=parts[0];end=parts[1];step=parts[2];}
+    const arr=[];
+    if(step>0){for(let i=start;i<end;i+=step) arr.push(i);}
+    else{for(let i=start;i>end;i+=step) arr.push(i);}
+    return arr;
+  }
+
+  m = expr.match(/^\[(.*)\]$/);
+  if(m){
+    const inner=m[1].trim();
+    if(!inner) return [];
+    return splitArgs(inner).map(x=>evalExpr(x,vars));
+  }
+
+  m = expr.match(/^([A-Za-z_][A-Za-z0-9_]*)\[(\d+)\]$/);
+  if(m){
+    const arr = vars[m[1]];
+    if(!Array.isArray(arr)) throw new Error('المتغير ليس قائمة: '+m[1]);
+    return arr[Number(m[2])];
+  }
+
+  if(vars.hasOwnProperty(expr)) return vars[expr];
+
+  // عمليات حسابية بسيطة وآمنة
+  if(/^[0-9+\-*/ ().]+$/.test(expr)){
+    return Function('return ('+expr+')')();
+  }
+
+  throw new Error('لم أفهم التعبير: ' + expr);
+}
+
+function runCode(){
+  const code = document.getElementById('code').value.split('\n');
+  const out=[]; const vars={};
+  try{
+    for(let raw of code){
+      let line = raw.trim();
+      if(!line || line.startsWith('#')) continue;
+
+      let m = line.match(/^print\((.*)\)$/);
+      if(m){
+        const values = splitArgs(m[1]).map(arg=>pyFormat(evalExpr(arg, vars)));
+        out.push(values.join(' '));
+        continue;
       }
-    }
 
-    function fillExample(){
-      document.getElementById('studentName').value = 'سارة أحمد';
-      document.getElementById('studentClass').value = 'الثالث متوسط';
-      document.getElementById('taskType').value = 'كود Python';
-      document.getElementById('taskTitle').value = 'طباعة بيانات الطالبة';
-      document.getElementById('studentCode').value = 'name = "Sara"\nclass_name = "Grade 9"\nprint("Student name:", name)\nprint("Class:", class_name)\nprint("Python is fun")';
-      document.getElementById('resultText').value = 'Student name: Sara\nClass: Grade 9\nPython is fun';
-      document.getElementById('projectDesc').value = 'استخدمت المتغيرات وأمر الطباعة لعرض بيانات الطالبة.';
-      document.getElementById('teacherNotes').value = 'حل منظم وواضح.';
-      document.getElementById('studentSignature').value = 'سارة أحمد';
-    }
+      m = line.match(/^([A-Za-z_][A-Za-z0-9_]*)\[(\d+)\]\s*=\s*(.+)$/);
+      if(m){
+        const name=m[1], index=Number(m[2]), value=evalExpr(m[3],vars);
+        if(!Array.isArray(vars[name])) throw new Error('لا يمكن تعديل عنصر لأن المتغير ليس قائمة: '+name);
+        vars[name][index]=value;
+        continue;
+      }
 
-    function makeCertificate(){
-      const name = document.getElementById('studentName').value || 'الطالبة المبدعة';
-      document.getElementById('certName').innerText = name;
-      document.getElementById('certificateBox').style.display = 'block';
-    }
+      m = line.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$/);
+      if(m){
+        vars[m[1]] = evalExpr(m[2], vars);
+        continue;
+      }
 
-    function clearForm(){
-      ['studentName','studentClass','taskTitle','studentCode','resultText','projectDesc','teacherNotes','studentSignature'].forEach(id => document.getElementById(id).value = '');
-      document.getElementById('imagePreview').innerHTML = '';
-      document.getElementById('certificateBox').style.display = 'none';
+      throw new Error('أمر غير مدعوم: ' + line);
     }
-  </script>
+    document.getElementById('output').textContent = out.join('\n') || 'تم التنفيذ بدون مخرجات.';
+  }catch(err){
+    document.getElementById('output').textContent = 'خطأ في الكود:\n' + err.message;
+  }
+}
+
+function example1(){
+  document.getElementById('code').value = "numbers=list(range(2,15,2))\nprint('الأعداد:', numbers)\nprint('العنصر الثالث:', numbers[2])";
+}
+function example2(){
+  document.getElementById('code').value = "name='نوره'\nprint('مرحباً', name)\nprint('نتيجة الجمع:', 5+7)";
+}
+function clearAll(){
+  document.getElementById('code').value='';
+  document.getElementById('output').textContent='';
+  document.getElementById('imagePreview').innerHTML='';
+}
+function previewImage(event){
+  const preview=document.getElementById('imagePreview');
+  preview.innerHTML='';
+  const file=event.target.files[0];
+  if(file){
+    const img=document.createElement('img');
+    img.src=URL.createObjectURL(file);
+    preview.appendChild(img);
+  }
+}
+</script>
 </body>
 </html>
