@@ -1,5 +1,5 @@
 
-      <!DOCTYPE html>
+     <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -41,9 +41,9 @@
 <body>
   <main class="container">
     <header>
-      <h1>منصة نوره الصحفي لتعلم البايثون</h1>
+      <h1>منصة VISION 360 لتعلم البرمجة</h1>
       <p>بيئة تعليمية تفاعلية تجمع بين تشغيل أكواد Python والرسم البرمجي والتحديات والشهادة.</p>
-      <p><b>إعداد المعلمة: نوره الصحفي - متوسطة وثانوية أم الجرم</b></p>
+      <p><b>نوره الصحفي - متوسطة وثانوية أم الجرم</b></p>
     </header>
 
     <section class="card">
@@ -138,7 +138,7 @@ forward(120)</textarea>
         <p>تُمنح هذه الشهادة للطالبة</p>
         <p><b id="certName">الطالبة المبدعة</b></p>
         <p>لإتمامها تجربة تعلم أساسيات Python والرسم البرمجي في منصة نوره الصحفي.</p>
-        <p><b>إعداد المعلمة: نوره الصحفي - متوسطة وثانوية أم الجرم</b></p>
+        <p><b>نوره الصحفي - متوسطة وثانوية أم الجرم</b></p>
       </div>
     </section>
   </main>
@@ -218,12 +218,52 @@ function right(deg){angle += deg;} function left(deg){angle -= deg;} function co
 function circle(r){ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.strokeStyle=lineColor; ctx.lineWidth=lineWidth; ctx.stroke();}
 function runDrawing(){
   clearCanvas();
-  const code = document.getElementById('drawCode').value.replace(/#.*$/gm,'');
+  const rawCode = document.getElementById('drawCode').value;
+  const lines = rawCode.split('
+');
+
   try{
-    Function('forward','right','left','color','width','penup','pendown','circle', code)(forward,right,left,color,width,penup,pendown,circle);
+    for(let rawLine of lines){
+      let line = rawLine.trim();
+      if(line === '' || line.startsWith('#')) continue;
+      line = line.replace(/;$/,'');
+
+      let match = line.match(/^(forward|right|left|width|circle)\(([-]?[0-9]+(?:\.[0-9]+)?)\)$/);
+      if(match){
+        const command = match[1];
+        const value = Number(match[2]);
+        if(command === 'forward') forward(value);
+        if(command === 'right') right(value);
+        if(command === 'left') left(value);
+        if(command === 'width') width(value);
+        if(command === 'circle') circle(value);
+        continue;
+      }
+
+      match = line.match(/^color\(["'](.+?)["']\)$/);
+      if(match){
+        color(match[1]);
+        continue;
+      }
+
+      if(line === 'penup()'){
+        penup();
+        continue;
+      }
+      if(line === 'pendown()'){
+        pendown();
+        continue;
+      }
+
+      throw new Error('الأمر غير صحيح: ' + line);
+    }
+
     document.getElementById('drawOutput').innerText = 'تم تنفيذ الرسم بنجاح ✅';
     addPoints(10);
-  }catch(e){document.getElementById('drawOutput').innerText = 'يوجد خطأ في الرسم:\n' + e.message;}
+  }catch(e){
+    document.getElementById('drawOutput').innerText = 'يوجد خطأ في الرسم:
+' + e.message;
+  }
 }
 function squareExample(){document.getElementById('drawCode').value='color("#6d28d9")\nwidth(5)\nforward(130)\nright(90)\nforward(130)\nright(90)\nforward(130)\nright(90)\nforward(130)';}
 function starExample(){document.getElementById('drawCode').value='color("#f59e0b")\nwidth(4)\nforward(150)\nright(144)\nforward(150)\nright(144)\nforward(150)\nright(144)\nforward(150)\nright(144)\nforward(150)';}
@@ -249,3 +289,4 @@ function makeCertificate(){
 </script>
 </body>
 </html>
+
