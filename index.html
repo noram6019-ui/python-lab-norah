@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -7,13 +6,13 @@
   <title>معمل لغة البايثون</title>
   <style>
     *{box-sizing:border-box;margin:0;padding:0;font-family:Tahoma,Arial,sans-serif}
-    body{background:#e5e5e5;color:#222;padding:28px}
-    .page{max-width:980px;margin:auto;background:white;border:1px solid #cfcfcf;box-shadow:0 0 10px #0002;padding:60px 72px;min-height:1200px}
-    .top{text-align:center;margin-bottom:36px}
-    .logo{font-size:92px;line-height:1;margin-bottom:14px}
-    h1{font-size:30px;margin-bottom:12px;font-weight:800}
-    .desc{color:#666;line-height:1.8;font-size:14px}
-    .teacher{font-size:13px;color:#555;margin-top:5px}
+    body{background:#e7e7e7;color:#222;padding:28px}
+    .page{max-width:980px;margin:auto;background:white;border:1px solid #cfcfcf;box-shadow:0 0 10px #0002;padding:58px 72px;min-height:1200px}
+    .top{text-align:center;margin-bottom:34px}
+    .python-logo{width:118px;height:118px;margin:auto auto 12px;display:flex;align-items:center;justify-content:center;font-size:90px}
+    h1{font-size:30px;margin-bottom:10px;font-weight:800}
+    .desc{color:#666;line-height:1.9;font-size:14px;max-width:680px;margin:auto}
+    .teacher{font-size:13px;color:#555;margin-top:6px}
     h2{font-size:20px;margin:24px 0 12px;display:flex;align-items:center;gap:8px}
     .grid{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:18px}
     label{display:block;font-size:14px;margin-bottom:6px;color:#333}
@@ -21,25 +20,25 @@
     textarea{min-height:225px;direction:ltr;text-align:left;font-family:Consolas,monospace;line-height:1.6;resize:vertical}
     .output{background:#111827;color:#d1fae5;border-radius:8px;padding:18px;min-height:165px;white-space:pre-wrap;direction:ltr;text-align:left;font-family:Consolas,monospace;line-height:1.7;overflow:auto}
     .buttons{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 8px}
-    button{border:0;border-radius:8px;padding:10px 16px;font-weight:bold;cursor:pointer;font-size:14px}
-    .run{background:#16a34a;color:white}.clear{background:#dc2626;color:white}.example{background:#2563eb;color:white}.print{background:#6d28d9;color:white}.gray{background:#e5e7eb;color:#111}
-    .note{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;line-height:1.8;color:#475569;margin-top:12px;font-size:14px}
+    button,a.btn{border:0;border-radius:8px;padding:10px 16px;font-weight:bold;cursor:pointer;font-size:14px;text-decoration:none;display:inline-block}
+    .run{background:#16a34a;color:white}.clear{background:#dc2626;color:white}.example{background:#2563eb;color:white}.print{background:#6d28d9;color:white}.link{background:#f59e0b;color:white}
+    .note{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:13px;line-height:1.9;color:#475569;margin-top:12px;font-size:14px}
     .upload{margin-top:18px}
     #imagePreview img{max-width:100%;border:1px solid #ddd;border-radius:8px;margin-top:10px}
     footer{display:flex;justify-content:space-between;color:#777;font-size:12px;margin-top:90px}
     .print-title{display:none;text-align:center;margin-bottom:18px}
-    @media(max-width:800px){body{padding:10px}.page{padding:30px 18px}.grid{grid-template-columns:1fr}.logo{font-size:72px}}
+    @media(max-width:800px){body{padding:10px}.page{padding:30px 18px}.grid{grid-template-columns:1fr}.python-logo{font-size:72px}}
     @media print{
-      body{background:white;padding:0}.page{border:0;box-shadow:none;max-width:100%;padding:28px}.buttons,.note .no-print{display:none!important}.print-title{display:block}textarea{min-height:170px}.output{color:white;background:#111827;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      body{background:white;padding:0}.page{border:0;box-shadow:none;max-width:100%;padding:28px}.buttons,.note{display:none!important}.print-title{display:block}textarea{min-height:170px}.output{color:white;background:#111827;-webkit-print-color-adjust:exact;print-color-adjust:exact}
     }
   </style>
 </head>
 <body>
   <main class="page">
     <div class="top">
-      <div class="logo">🐍</div>
+      <div class="python-logo">🐍</div>
       <h1>💻 معمل لغة البايثون</h1>
-      <p class="desc">بيئة تعليمية لتجربة أوامر بايثون الأساسية وورقة النتيجة مباشرة</p>
+      <p class="desc">بيئة بايثون تعليمية صُممت لتنفيذ المشاريع البرمجية، حيث تتيح للطالبة تطبيق مشاريع رياضية ومنطقية، والتعامل مع البيانات البسيطة وغير البسيطة مثل القوائم، كما تدعم مشاريع الرسم بالسلحفاة عبر رابط خارجي، مع إمكانية توثيق المشروع وطباعته بصيغة PDF.</p>
       <p class="teacher">إعداد المعلمة: نوره الصحفي - متوسطة وثانوية أم الجرم</p>
     </div>
 
@@ -48,36 +47,37 @@
       <div class="grid">
         <div>
           <label>اسم الطالبة</label>
-          <input id="studentName" value="سلطان بندر المزروعي" />
+          <input id="studentName" placeholder="اكتبي اسم الطالبة" />
         </div>
         <div>
           <label>الصف الدراسي</label>
-          <input id="studentClass" value="الثالث متوسط" />
+          <input id="studentClass" placeholder="مثال: الثالث متوسط" />
         </div>
       </div>
     </section>
 
     <section>
       <h2>🧾 نافذة كتابة الكود (Python)</h2>
-      <textarea id="code">print('سلطان بندر وصل في العشرة')
-sultan_list=list(range(4,27,2))
-print('ثالث الأعداد الزوجية:', sultan_list)
+      <textarea id="code">print('مرحبا في معمل لغة البايثون')
+numbers=list(range(4,27,2))
+print('الأعداد الزوجية:', numbers)
+print('العنصر الخامس:', numbers[4])
 sport=['الهلال','الاتحاد','الأهلي']
-print('أنديه sport:',sport)
+print('الأندية:', sport)
 sport[2]='النصر'
-print('بعد التعديل أنديه sport:',sport)
-print('العنصر الخامس من قائمة sultan',sultan_list[4])
-print('العنصر الثاني من sport:',sport[1])</textarea>
+print('بعد التعديل:', sport)
+print('نتيجة عملية حسابية:', 5+7)</textarea>
 
       <div class="buttons">
         <button class="run" onclick="runCode()">▶ تشغيل الكود</button>
-        <button class="example" onclick="example1()">مثال القوائم</button>
-        <button class="example" onclick="example2()">مثال الطباعة</button>
+        <button class="example" onclick="exampleMath()">مثال رياضي</button>
+        <button class="example" onclick="exampleList()">مثال القوائم</button>
+        <a class="btn link" href="https://trinket.io/turtle" target="_blank">🎨 الرسم بالسلحفاة</a>
         <button class="clear" onclick="clearAll()">مسح</button>
         <button class="print" onclick="window.print()">طباعة PDF</button>
       </div>
 
-      <div class="note">ملاحظة: هذا المعمل يعمل داخل المتصفح بدون مكتبات خارجية، ويدعم الأوامر التعليمية الأساسية: print، المتغيرات، النصوص، الأرقام، القوائم، range، list، وتعديل عناصر القائمة.</div>
+      <div class="note">يدعم هذا المعمل الأوامر التعليمية الأساسية داخل الصفحة مثل: print، المتغيرات، العمليات الحسابية، القوائم، list(range)، تعديل عناصر القائمة. وللمشاريع المتقدمة أو الرسم بالسلحفاة استخدمي زر الرسم بالسلحفاة ثم ارفعي صورة الناتج هنا.</div>
     </section>
 
     <section>
@@ -93,7 +93,7 @@ print('العنصر الثاني من sport:',sport[1])</textarea>
     </section>
 
     <footer>
-      <span>https://sa-i.net/py</span>
+      <span>VISION 360 - معمل لغة البايثون</span>
       <span>صفحة 1 من 1</span>
     </footer>
   </main>
@@ -104,7 +104,6 @@ function pyFormat(value){
   if(typeof value === 'string') return value;
   return String(value);
 }
-
 function splitArgs(text){
   const args=[]; let cur=''; let quote=null; let depth=0;
   for(let i=0;i<text.length;i++){
@@ -119,12 +118,10 @@ function splitArgs(text){
   if(cur.trim()) args.push(cur.trim());
   return args;
 }
-
 function evalExpr(expr, vars){
   expr = expr.trim();
   if((expr.startsWith('"') && expr.endsWith('"')) || (expr.startsWith("'") && expr.endsWith("'"))) return expr.slice(1,-1);
   if(/^-?\d+(\.\d+)?$/.test(expr)) return Number(expr);
-
   let m = expr.match(/^list\(range\((.*)\)\)$/);
   if(m){
     const parts = splitArgs(m[1]).map(Number);
@@ -133,50 +130,38 @@ function evalExpr(expr, vars){
     if(parts.length===2){start=parts[0];end=parts[1];}
     if(parts.length===3){start=parts[0];end=parts[1];step=parts[2];}
     const arr=[];
-    if(step>0){for(let i=start;i<end;i+=step) arr.push(i);}
-    else{for(let i=start;i>end;i+=step) arr.push(i);}
+    if(step>0){for(let i=start;i<end;i+=step) arr.push(i);} else {for(let i=start;i>end;i+=step) arr.push(i);}
     return arr;
   }
-
   m = expr.match(/^\[(.*)\]$/);
   if(m){
     const inner=m[1].trim();
     if(!inner) return [];
     return splitArgs(inner).map(x=>evalExpr(x,vars));
   }
-
   m = expr.match(/^([A-Za-z_][A-Za-z0-9_]*)\[(\d+)\]$/);
   if(m){
     const arr = vars[m[1]];
     if(!Array.isArray(arr)) throw new Error('المتغير ليس قائمة: '+m[1]);
     return arr[Number(m[2])];
   }
-
   if(vars.hasOwnProperty(expr)) return vars[expr];
-
-  // عمليات حسابية بسيطة وآمنة
-  if(/^[0-9+\-*/ ().]+$/.test(expr)){
-    return Function('return ('+expr+')')();
-  }
-
+  if(/^[0-9+\-*/ ().]+$/.test(expr)) return Function('return ('+expr+')')();
   throw new Error('لم أفهم التعبير: ' + expr);
 }
-
 function runCode(){
-  const code = document.getElementById('code').value.split('\n');
+  const lines = document.getElementById('code').value.split('\n');
   const out=[]; const vars={};
   try{
-    for(let raw of code){
+    for(let raw of lines){
       let line = raw.trim();
       if(!line || line.startsWith('#')) continue;
-
       let m = line.match(/^print\((.*)\)$/);
       if(m){
         const values = splitArgs(m[1]).map(arg=>pyFormat(evalExpr(arg, vars)));
         out.push(values.join(' '));
         continue;
       }
-
       m = line.match(/^([A-Za-z_][A-Za-z0-9_]*)\[(\d+)\]\s*=\s*(.+)$/);
       if(m){
         const name=m[1], index=Number(m[2]), value=evalExpr(m[3],vars);
@@ -184,26 +169,18 @@ function runCode(){
         vars[name][index]=value;
         continue;
       }
-
       m = line.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$/);
-      if(m){
-        vars[m[1]] = evalExpr(m[2], vars);
-        continue;
-      }
-
-      throw new Error('أمر غير مدعوم: ' + line);
+      if(m){vars[m[1]] = evalExpr(m[2], vars); continue;}
+      out.push('⚠️ تم تجاهل سطر غير مدعوم: ' + line);
     }
     document.getElementById('output').textContent = out.join('\n') || 'تم التنفيذ بدون مخرجات.';
-  }catch(err){
-    document.getElementById('output').textContent = 'خطأ في الكود:\n' + err.message;
-  }
+  }catch(err){document.getElementById('output').textContent = 'تنبيه في الكود:\n' + err.message;}
 }
-
-function example1(){
-  document.getElementById('code').value = "numbers=list(range(2,15,2))\nprint('الأعداد:', numbers)\nprint('العنصر الثالث:', numbers[2])";
+function exampleMath(){
+  document.getElementById('code').value = "x=10\ny=5\nprint('الجمع:', x+y)\nprint('الضرب:', x*y)";
 }
-function example2(){
-  document.getElementById('code').value = "name='نوره'\nprint('مرحباً', name)\nprint('نتيجة الجمع:', 5+7)";
+function exampleList(){
+  document.getElementById('code').value = "numbers=list(range(2,15,2))\nprint('الأعداد:', numbers)\nprint('العنصر الثالث:', numbers[2])\nnames=['سارة','هند','نورة']\nnames[1]='جود'\nprint('الأسماء بعد التعديل:', names)";
 }
 function clearAll(){
   document.getElementById('code').value='';
@@ -214,12 +191,11 @@ function previewImage(event){
   const preview=document.getElementById('imagePreview');
   preview.innerHTML='';
   const file=event.target.files[0];
-  if(file){
-    const img=document.createElement('img');
-    img.src=URL.createObjectURL(file);
-    preview.appendChild(img);
-  }
+  if(file){const img=document.createElement('img');img.src=URL.createObjectURL(file);preview.appendChild(img);}
 }
 </script>
 </body>
 </html>
+
+
+     
