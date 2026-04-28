@@ -9,6 +9,9 @@
     body{margin:0;background:linear-gradient(135deg,#f7f8ff,#eef7ff);color:#172033;padding:20px}
     .container{max-width:1150px;margin:auto}
     header{background:linear-gradient(135deg,#172554,#5b21b6,#0e7490);color:white;text-align:center;padding:34px;border-radius:30px;margin-bottom:22px;box-shadow:0 18px 40px #0002}
+    header h1{margin:0 0 10px;font-size:44px;font-weight:900;background:linear-gradient(90deg,#22c55e,#60a5fa,#a78bfa,#facc15);background-size:300% 300%;-webkit-background-clip:text;color:transparent;animation:titleGlow 4s ease infinite, fadeDown 1s ease}
+    header .sub{margin:7px 0;font-size:18px;line-height:1.8}
+    header .teacher{font-size:18px;font-weight:bold;margin-top:8px}
     header h1{margin:0 0 10px;font-size:42px}
     header p{margin:7px 0;font-size:18px;line-height:1.8}
     .card{background:white;border-radius:24px;padding:22px;box-shadow:0 12px 28px #0001;border:1px solid #e8ecff;margin-bottom:18px}
@@ -26,6 +29,9 @@
     .note{background:#ecfeff;border:1px solid #bae6fd;border-radius:16px;padding:14px;line-height:1.8;color:#164e63}
     .print-area{border:2px dashed #c7d2fe;border-radius:20px;padding:18px;background:#ffffff}
     footer{text-align:center;color:#475569;font-weight:bold;padding:18px}
+    @keyframes titleGlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    @keyframes fadeDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+    header .teacher{animation:fadeDown 1.3s ease}
     @media(max-width:850px){.grid{grid-template-columns:1fr}header h1{font-size:30px}}
     @media print{
       body{background:white;padding:0}
@@ -43,9 +49,9 @@
 <body>
   <main class="container">
     <header>
-      <h1>منصة VISION 360 لتعلم البرمجة</h1>
-      <p>منصة تعليمية لتنظيم دروس Python، كتابة الحلول، توثيق النتيجة، وطباعة ملف PDF باسم الطالبة.</p>
-      <p><b>نوره الصحفي - متوسطة وثانوية أم الجرم</b></p>
+      <h1>🚀 منصة VISION 360 لتعلم البرمجة 🐍</h1>
+      <p class="sub">منصة تعليمية لتنظيم دروس Python، كتابة الحلول، توثيق النتيجة، وطباعة ملف PDF باسم الطالبة.</p>
+      <p class="teacher">👩‍🏫 نوره الصحفي - متوسطة وثانوية أم الجرم 💻</p>
     </header>
 
     <section class="card no-print">
@@ -106,11 +112,26 @@ print("أنا أتعلم البرمجة بثقة")</textarea>
       <label>الناتج بعد التشغيل</label>
       <textarea id="resultText" class="arabic-text" placeholder="تكتب الطالبة هنا ناتج التشغيل أو تلصق وصف النتيجة"></textarea>
 
+      <label>أو رفع صورة للناتج</label>
+      <input type="file" id="resultImage" accept="image/*" onchange="previewImage(event)">
+      <div id="imagePreview" style="margin-top:10px;"></div>
+
       <label>وصف الرسم أو فكرة المشروع</label>
       <textarea id="projectDesc" class="arabic-text" placeholder="مثال: رسمت مربعًا باستخدام أوامر forward و right"></textarea>
 
       <label>ملاحظات المعلمة</label>
       <textarea id="teacherNotes" class="arabic-text" placeholder="تكتب المعلمة ملاحظاتها هنا عند التصحيح"></textarea>
+
+      <label>تقييم الطالبة</label>
+      <select id="evaluation">
+        <option>ممتاز ⭐</option>
+        <option>جيد جدًا 👍</option>
+        <option>جيد 🙂</option>
+        <option>يحتاج تحسين ⚠️</option>
+      </select>
+
+      <label>توقيع الطالبة</label>
+      <input id="studentSignature" placeholder="اكتبي اسمك كتوقيع">
 
       <div class="buttons no-print">
         <button class="primary" onclick="preparePrint()">🖨 طباعة الحل PDF</button>
@@ -139,11 +160,19 @@ function fillExample(){
 function clearForm(){
   ['studentName','studentClass','taskTitle','studentCode','resultText','projectDesc','teacherNotes'].forEach(id=>document.getElementById(id).value='');
 }
+function previewImage(event){
+  const preview = document.getElementById('imagePreview');
+  preview.innerHTML = '';
+  const file = event.target.files[0];
+  if(file){
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    img.style.maxWidth = '100%';
+    img.style.borderRadius = '10px';
+    img.style.marginTop = '10px';
+    preview.appendChild(img);
+  }
+}
 </script>
 </body>
 </html>
-
-
-        
-
-   
