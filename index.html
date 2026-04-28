@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>معمل لغة البايثون - الرسم</title>
+  <style>
+    *{box-sizing:border-box;font-family:Tahoma,Arial,sans-serif}
+    body{margin:0;background:#f4f7ff;color:#172033;padding:20px}
+    .container{max-width:1150px;margin:auto}
+    header{background:linear-gradient(135deg,#2b59c3,#6d28d9);color:white;text-align:center;padding:32px;border-radius:28px;margin-bottom:22px;box-shadow:0 18px 35px #0002}
+    header h1{margin:0 0 10px;font-size:40px}
+    header p{margin:6px 0;font-size:18px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .card{background:white;border-radius:24px;padding:20px;box-shadow:0 12px 28px #0001;border:1px solid #e8ecff}
+    label{font-weight:bold;display:block;margin-bottom:7px}
+    input,textarea{width:100%;border:1px solid #d7ddf5;border-radius:14px;padding:12px;margin-bottom:12px;font-size:15px}
+    textarea{height:330px;direction:ltr;text-align:left;background:#101827;color:#d1fae5;font-family:Consolas,monospace;line-height:1.6;resize:vertical}
+    button{border:0;border-radius:14px;padding:12px 16px;margin:5px 3px;font-weight:bold;cursor:pointer;font-size:14px}
+    .run{background:#16a34a;color:white}.clear{background:#dc2626;color:white}.lesson{background:#2563eb;color:white}.print{background:#7c3aed;color:white}
+    #output{background:#111827;color:#d1fae5;border-radius:16px;min-height:100px;padding:15px;white-space:pre-wrap;direction:ltr;text-align:left;font-family:Consolas,monospace}
+    canvas{width:100%;height:420px;background:white;border:2px dashed #c7d2fe;border-radius:18px}
+    .hint{background:#eef2ff;border-radius:16px;padding:14px;line-height:1.8;color:#334155;margin-top:12px}
+    @media(max-width:850px){.grid{grid-template-columns:1fr}header h1{font-size:30px}}
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>🐍 معمل لغة البايثون للرسم</h1>
+      <p>منصة تعليمية لتجربة أوامر Python والرسم البرمجي بطريقة مبسطة</p>
+      <p><b>إعداد المعلمة: نوره الصحفي</b></p>
+    </header>
+
+    <section class="card">
+      <label>اسم الطالبة</label>
+      <input id="student" placeholder="اكتبي اسم الطالبة">
+      <label>الصف الدراسي</label>
+      <input id="grade" placeholder="مثال: الثالث متوسط">
+    </section>
+
+    <section class="grid" style="margin-top:20px">
+      <div class="card">
+        <h2>✍️ نافذة كتابة الكود</h2>
+        <textarea id="code"># ارسمي مربعاً باستخدام أوامر تشبه turtle
+color("#6d28d9")
+width(4)
+forward(120)
+right(90)
+forward(120)
+right(90)
+forward(120)
+right(90)
+forward(120)</textarea>
+
+        <button class="run" onclick="runDrawing()">▶ تشغيل الرسم</button>
+        <button class="lesson" onclick="squareExample()">□ مربع</button>
+        <button class="lesson" onclick="starExample()">☆ نجمة</button>
+        <button class="lesson" onclick="flowerExample()">✿ وردة</button>
+        <button class="clear" onclick="clearCanvas()">🧹 مسح</button>
+        <button class="print" onclick="window.print()">🖨 طباعة</button>
+
+        <div class="hint">
+          <b>الأوامر المدعومة:</b><br>
+          forward(100) — التقدم للأمام<br>
+          right(90) — دوران يمين<br>
+          left(90) — دوران يسار<br>
+          color("red") — تغيير اللون<br>
+          width(4) — سماكة الخط<br>
+          circle(60) — رسم دائرة<br>
+          penup() و pendown() — رفع/إنزال القلم
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🎨 نتيجة مشاريع الرسم</h2>
+        <canvas id="canvas" width="520" height="420"></canvas>
+        <h2>💻 النتيجة النصية</h2>
+        <div id="output">جاهز للرسم...</div>
+      </div>
+    </section>
+  </main>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let x, y, angle, penDown, lineColor, lineWidth;
+
+function resetPen(){
+  x = canvas.width/2;
+  y = canvas.height/2;
+  angle = 0;
+  penDown = true;
+  lineColor = '#2563eb';
+  lineWidth = 3;
+}
+
+function clearCanvas(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  resetPen();
+  document.getElementById('output').innerText = 'تم مسح اللوحة.';
+}
+
+function drawLineTo(nx, ny){
+  if(penDown){
+    ctx.beginPath();
+    ctx.moveTo(x,y);
+    ctx.lineTo(nx,ny);
+    ctx.strokeStyle = lineColor;
+    ctx.lineWidth = lineWidth;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+  }
+  x = nx; y = ny;
+}
+
+function forward(n){
+  const rad = angle * Math.PI / 180;
+  drawLineTo(x + Math.cos(rad)*n, y + Math.sin(rad)*n);
+}
+function right(deg){ angle += deg; }
+function left(deg){ angle -= deg; }
+function color(c){ lineColor = c; }
+function width(w){ lineWidth = w; }
+function penup(){ penDown = false; }
+function pendown(){ penDown = true; }
+function circle(r){
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI*2);
+  ctx.strokeStyle = lineColor;
+  ctx.lineWidth = lineWidth;
+  ctx.stroke();
+}
+
+function runDrawing(){
+  clearCanvas();
+  const code = document.getElementById('code').value;
+  const safeCode = code.replace(/#.*$/gm,'');
+  try{
+    Function('forward','right','left','color','width','penup','pendown','circle', safeCode)(forward,right,left,color,width,penup,pendown,circle);
+    document.getElementById('output').innerText = 'تم تنفيذ مشروع الرسم بنجاح ✅';
+  }catch(e){
+    document.getElementById('output').innerText = 'يوجد خطأ في الكود:\n' + e.message;
+  }
+}
+
+function squareExample(){
+  document.getElementById('code').value = `color("#6d28d9")\nwidth(5)\nforward(130)\nright(90)\nforward(130)\nright(90)\nforward(130)\nright(90)\nforward(130)`;
+}
+
+function starExample(){
+  document.getElementById('code').value = `color("#f59e0b")\nwidth(4)\nforward(150)\nright(144)\nforward(150)\nright(144)\nforward(150)\nright(144)\nforward(150)\nright(144)\nforward(150)`;
+}
+
+function flowerExample(){
+  document.getElementById('code').value = `color("#a855f7")\nwidth(3)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)\nright(45)\ncircle(45)`;
+}
+
+resetPen();
+</script>
+</body>
+</html>
