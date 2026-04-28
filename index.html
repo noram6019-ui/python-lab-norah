@@ -1,86 +1,224 @@
-<!DOCTYPE html>
+
+  <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>منصة VISION 360 لتعلم البرمجة</title>
   <style>
-    *{box-sizing:border-box;font-family:Tahoma,Arial,sans-serif}
-    body{margin:0;background:linear-gradient(135deg,#f7f8ff,#eef7ff);color:#172033;padding:20px}
-    .container{max-width:1150px;margin:auto}
-    header{background:linear-gradient(135deg,#172554,#5b21b6,#0e7490);color:white;text-align:center;padding:34px;border-radius:30px;margin-bottom:22px;box-shadow:0 18px 40px #0002}
-    header h1{margin:0 0 10px;font-size:44px;font-weight:900;background:linear-gradient(90deg,#22c55e,#60a5fa,#a78bfa,#facc15);background-size:300% 300%;-webkit-background-clip:text;color:transparent;animation:titleGlow 4s ease infinite, fadeDown 1s ease}
-    header .sub{margin:7px 0;font-size:18px;line-height:1.8}
-    header .teacher{font-size:18px;font-weight:bold;margin-top:8px}
-    header h1{margin:0 0 10px;font-size:42px}
-    header p{margin:7px 0;font-size:18px;line-height:1.8}
-    .card{background:white;border-radius:24px;padding:22px;box-shadow:0 12px 28px #0001;border:1px solid #e8ecff;margin-bottom:18px}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    label{font-weight:bold;display:block;margin-bottom:7px;color:#26345f}
-    input,textarea,select{width:100%;border:1px solid #d7ddf5;border-radius:14px;padding:12px;margin-bottom:12px;font-size:15px;background:#fbfcff}
-    textarea{min-height:170px;direction:ltr;text-align:left;background:#101827;color:#d1fae5;font-family:Consolas,monospace;line-height:1.7;resize:vertical}
-    .arabic-text{direction:rtl;text-align:right;background:#fbfcff;color:#172033;font-family:Tahoma,Arial,sans-serif}
-    .buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    button,a.btn{border:0;border-radius:14px;padding:12px 18px;margin:4px 0;font-weight:bold;cursor:pointer;font-size:15px;text-decoration:none;display:inline-block}
-    .primary{background:#16a34a;color:white}.blue{background:#2563eb;color:white}.purple{background:#7c3aed;color:white}.red{background:#dc2626;color:white}.gold{background:#f59e0b;color:white}
-    .lesson{background:#eef2ff;border-right:6px solid #5b21b6;padding:18px;border-radius:18px;line-height:1.9;margin-bottom:14px}
-    .challenge{background:#fff7ed;border-right:6px solid #f59e0b;padding:18px;border-radius:18px;line-height:1.9;margin-bottom:14px}
-    .output{background:#111827;color:#d1fae5;border-radius:16px;min-height:90px;padding:15px;white-space:pre-wrap;direction:ltr;text-align:left;font-family:Consolas,monospace;overflow:auto}
-    .note{background:#ecfeff;border:1px solid #bae6fd;border-radius:16px;padding:14px;line-height:1.8;color:#164e63}
-    .print-area{border:2px dashed #c7d2fe;border-radius:20px;padding:18px;background:#ffffff}
-    footer{text-align:center;color:#475569;font-weight:bold;padding:18px}
-    @keyframes titleGlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-    @keyframes fadeDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
-    header .teacher{animation:fadeDown 1.3s ease}
-    @media(max-width:850px){.grid{grid-template-columns:1fr}header h1{font-size:30px}}
-    @media print{
-      body{background:white;padding:0}
-      header,.no-print,footer{display:none!important}
-      .container{max-width:100%;margin:0}
-      .card{box-shadow:none;border:0;margin:0;padding:10px}
-      input,textarea,select{border:1px solid #999;background:white;color:#000}
-      textarea{min-height:120px;color:#000;background:white}
-      .print-area{border:2px solid #333}
-      .page-title{display:block!important;text-align:center;margin-bottom:18px}
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Tahoma,Arial,sans-serif}
+    body{
+      min-height:100vh;
+      background:radial-gradient(circle at top right,#dbeafe 0,#f8fafc 35%,#eef2ff 100%);
+      color:#172033;
+      padding:22px;
     }
+    .container{max-width:1200px;margin:auto}
+    .hero{
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(135deg,#0f172a,#312e81,#0e7490);
+      color:white;
+      border-radius:34px;
+      padding:42px 34px;
+      margin-bottom:24px;
+      box-shadow:0 24px 50px rgba(15,23,42,.22);
+    }
+    .hero:before{
+      content:"</>";
+      position:absolute;
+      left:34px;
+      top:6px;
+      font-size:150px;
+      font-weight:900;
+      opacity:.08;
+      direction:ltr;
+    }
+    .tag{
+      display:inline-block;
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.25);
+      padding:9px 18px;
+      border-radius:999px;
+      margin-bottom:16px;
+      font-weight:bold;
+    }
+    h1{
+      font-size:clamp(34px,5vw,58px);
+      line-height:1.25;
+      margin-bottom:12px;
+      font-weight:900;
+      background:linear-gradient(90deg,#22c55e,#60a5fa,#c084fc,#facc15);
+      background-size:300% 300%;
+      -webkit-background-clip:text;
+      color:transparent;
+      animation:glow 5s ease infinite;
+    }
+    @keyframes glow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    .hero p{font-size:20px;line-height:1.8;max-width:850px;color:#e0f2fe}
+    .teacher{
+      margin-top:18px;
+      display:inline-block;
+      background:rgba(255,255,255,.14);
+      padding:12px 20px;
+      border-radius:18px;
+      font-weight:bold;
+      font-size:18px;
+    }
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+    .card{
+      background:rgba(255,255,255,.92);
+      border:1px solid #e0e7ff;
+      border-radius:26px;
+      padding:22px;
+      box-shadow:0 16px 35px rgba(15,23,42,.08);
+      margin-bottom:18px;
+    }
+    .mini{text-align:center;min-height:150px}
+    .mini .icon{font-size:40px;margin-bottom:10px}
+    h2{color:#312e81;margin-bottom:14px;font-size:26px}
+    h3{color:#0f172a;margin-bottom:8px;font-size:20px}
+    p,li{line-height:1.9;font-size:16px;color:#334155}
+    .lesson,.challenge{
+      background:linear-gradient(135deg,#ffffff,#f5f3ff);
+      border-right:6px solid #6d28d9;
+      border-radius:18px;
+      padding:16px;
+      margin-bottom:12px;
+    }
+    .challenge{border-right-color:#f59e0b;background:linear-gradient(135deg,#fff,#fff7ed)}
+    code{
+      display:inline-block;
+      direction:ltr;
+      background:#111827;
+      color:#d1fae5;
+      padding:5px 9px;
+      border-radius:8px;
+      margin:3px;
+      font-family:Consolas,monospace;
+    }
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    a.btn,button{
+      border:0;
+      border-radius:15px;
+      padding:12px 18px;
+      font-weight:bold;
+      text-decoration:none;
+      cursor:pointer;
+      display:inline-block;
+      font-size:15px;
+    }
+    .blue{background:#2563eb;color:white}.purple{background:#7c3aed;color:white}.green{background:#16a34a;color:white}.gold{background:#f59e0b;color:white}.red{background:#dc2626;color:white}.dark{background:#0f172a;color:white}
+    label{font-weight:bold;display:block;margin:12px 0 7px;color:#26345f}
+    input,textarea,select{
+      width:100%;
+      border:1px solid #cbd5e1;
+      border-radius:15px;
+      padding:13px;
+      font-size:16px;
+      background:#fbfcff;
+    }
+    textarea{min-height:135px;resize:vertical;line-height:1.7}
+    .codebox{direction:ltr;text-align:left;background:#101827;color:#d1fae5;font-family:Consolas,monospace}
+    .note{background:#ecfeff;border:1px solid #bae6fd;border-radius:18px;padding:16px;color:#164e63;line-height:1.9;margin-top:10px}
+    .rubric{width:100%;border-collapse:collapse;margin-top:10px;overflow:hidden;border-radius:14px}
+    .rubric th,.rubric td{border:1px solid #e2e8f0;padding:12px;text-align:center}
+    .rubric th{background:#312e81;color:white}
+    .print-area{border:2px dashed #a5b4fc;background:white}
+    #imagePreview img{max-width:100%;border-radius:14px;margin-top:10px;border:1px solid #cbd5e1}
+    .certificate{
+      display:none;
+      text-align:center;
+      border:4px double #b45309;
+      background:#fffdf3;
+      border-radius:24px;
+      padding:30px;
+      margin-top:18px;
+    }
+    .certificate h2{font-size:36px;color:#92400e}
+    footer{text-align:center;padding:20px;color:#475569;font-weight:bold}
     .page-title{display:none}
+    @media(max-width:900px){.grid,.cards3{grid-template-columns:1fr}.hero{padding:30px 22px}}
+    @media print{
+      body{background:white;padding:0;color:#000}
+      .hero,.no-print,footer{display:none!important}
+      .container{max-width:100%;margin:0}
+      .card{box-shadow:none;border:0;margin:0;padding:12px}
+      .print-area{border:2px solid #111;border-radius:0}
+      input,textarea,select{border:1px solid #555;background:white;color:#000}
+      .page-title{display:block;text-align:center;margin:10px 0 20px;color:#111}
+      #imagePreview img{max-height:320px;object-fit:contain}
+    }
   </style>
 </head>
 <body>
   <main class="container">
-    <header>
+    <section class="hero">
+      <div class="tag">منصة تعليمية رقمية متكاملة</div>
       <h1>🚀 منصة VISION 360 لتعلم البرمجة 🐍</h1>
-      <p class="sub">منصة تعليمية لتنظيم دروس Python، كتابة الحلول، توثيق النتيجة، وطباعة ملف PDF باسم الطالبة.</p>
-      <p class="teacher">👩‍🏫 نوره الصحفي - متوسطة وثانوية أم الجرم 💻</p>
-    </header>
+      <p>بيئة منظمة تجمع بين التعلم، التطبيق، التوثيق، والتقييم؛ حيث تتعلم الطالبة أساسيات Python، تنفذ الكود في محررات حقيقية، ثم توثق ناتجها وترفعه للطباعة بصيغة PDF.</p>
+      <div class="teacher">👩‍🏫 نوره الصحفي - متوسطة وثانوية أم الجرم 💻</div>
+    </section>
 
-    <section class="card no-print">
-      <h2>🚀 فكرة المنصة</h2>
-      <p class="note">هذه النسخة ثابتة ومضمونة: الطالبة تتعلم من الدرس، تفتح محرر Python حقيقي من الأزرار، تكتب حلها في النموذج، ثم تطبع الحل PDF للتسليم والتقييم.</p>
-      <div class="buttons">
-        <a class="btn blue" href="https://trinket.io/python" target="_blank">فتح محرر Python حقيقي</a>
-        <a class="btn purple" href="https://trinket.io/turtle" target="_blank">فتح محرر Turtle للرسم</a>
-        <a class="btn gold" href="https://replit.com/languages/python3" target="_blank">فتح Replit Python</a>
+    <section class="cards3 no-print">
+      <div class="card mini">
+        <div class="icon">💻</div>
+        <h3>تشغيل حقيقي</h3>
+        <p>روابط مباشرة لمحررات Python موثوقة تعمل أونلاين.</p>
+      </div>
+      <div class="card mini">
+        <div class="icon">🎨</div>
+        <h3>رسم برمجي</h3>
+        <p>تطبيق مشاريع Turtle وإرفاق صورة الناتج داخل النموذج.</p>
+      </div>
+      <div class="card mini">
+        <div class="icon">📄</div>
+        <h3>PDF للتقييم</h3>
+        <p>تسليم منظم باسم الطالبة مع كود وصورة وملاحظات.</p>
       </div>
     </section>
 
     <section class="card no-print">
-      <h2>📚 دروس سريعة</h2>
-      <div class="lesson"><b>1. الطباعة:</b><br><code>print("مرحبا")</code></div>
-      <div class="lesson"><b>2. المتغيرات:</b><br><code>name = "Sara"</code><br><code>print(name)</code></div>
-      <div class="lesson"><b>3. الشروط:</b><br><code>if score >= 90:</code><br><code>&nbsp;&nbsp;&nbsp;&nbsp;print("ممتاز")</code></div>
-      <div class="lesson"><b>4. الرسم البرمجي:</b><br><code>forward(100)</code> ثم <code>right(90)</code></div>
+      <h2>🔗 بيئات التنفيذ المعتمدة</h2>
+      <p>تستخدم الطالبة هذه الروابط لتشغيل الكود فعليًا، ثم تعود للمنصة لتوثيق الحل ورفع صورة النتيجة.</p>
+      <div class="btns">
+        <a class="btn blue" href="https://trinket.io/python" target="_blank">فتح Python Trinket</a>
+        <a class="btn purple" href="https://trinket.io/turtle" target="_blank">فتح Turtle للرسم</a>
+        <a class="btn dark" href="https://replit.com/languages/python3" target="_blank">فتح Replit Python</a>
+      </div>
+      <div class="note">ميزة هذه الطريقة أنها ثابتة واحترافية: التنفيذ يتم في بيئة حقيقية، والمنصة تقوم بدور التعليم والتوثيق والتقييم.</div>
+    </section>
+
+    <section class="grid no-print">
+      <div class="card">
+        <h2>📚 مسار التعلم</h2>
+        <div class="lesson"><b>1. الطباعة</b><br><code>print("Hello")</code></div>
+        <div class="lesson"><b>2. المتغيرات</b><br><code>name = "Sara"</code> <code>print(name)</code></div>
+        <div class="lesson"><b>3. الشروط</b><br><code>if score >= 90:</code> <code>print("Excellent")</code></div>
+        <div class="lesson"><b>4. الرسم البرمجي</b><br><code>forward(100)</code> <code>right(90)</code></div>
+      </div>
+      <div class="card">
+        <h2>🏆 تحديات VISION 360</h2>
+        <div class="challenge"><b>التحدي 1:</b> برنامج يطبع اسم الطالبة وصفها وعبارة تحفيزية.</div>
+        <div class="challenge"><b>التحدي 2:</b> برنامج يستخدم متغيرين ويعرض ناتجًا.</div>
+        <div class="challenge"><b>التحدي 3:</b> رسم شكل باستخدام Turtle ورفع صورة الناتج.</div>
+        <div class="challenge"><b>التحدي 4:</b> شرح فكرة الكود بلغة الطالبة.</div>
+      </div>
     </section>
 
     <section class="card no-print">
-      <h2>🏆 تحديات للطالبات</h2>
-      <div class="challenge"><b>التحدي الأول:</b> اكتبي برنامجًا يطبع اسمك وصفك وعبارة تحفيزية.</div>
-      <div class="challenge"><b>التحدي الثاني:</b> اكتبي برنامجًا يستخدم متغيرين ثم يطبع الناتج.</div>
-      <div class="challenge"><b>التحدي الثالث:</b> نفذي رسمة بسيطة باستخدام Turtle ثم اكتبي وصف الرسم.</div>
+      <h2>📊 بطاقة تقييم مختصرة</h2>
+      <table class="rubric">
+        <tr><th>المعيار</th><th>ممتاز</th><th>جيد جدًا</th><th>يحتاج تحسين</th></tr>
+        <tr><td>صحة الكود</td><td>يعمل بلا أخطاء</td><td>أخطاء بسيطة</td><td>يحتاج مراجعة</td></tr>
+        <tr><td>توثيق الناتج</td><td>صورة/ناتج واضح</td><td>توثيق مقبول</td><td>غير مكتمل</td></tr>
+        <tr><td>شرح الفكرة</td><td>شرح واضح</td><td>شرح متوسط</td><td>شرح غير كافٍ</td></tr>
+      </table>
     </section>
 
     <section class="card print-area">
-      <h2 class="page-title">نموذج تسليم مهمة برمجية</h2>
+      <h2 class="page-title">نموذج تسليم مهمة برمجية - منصة VISION 360</h2>
       <h2>📝 نموذج حل الطالبة</h2>
       <div class="grid">
         <div>
@@ -102,27 +240,24 @@
       </select>
 
       <label>عنوان المهمة</label>
-      <input id="taskTitle" placeholder="مثال: برنامج يطبع اسم الطالبة">
+      <input id="taskTitle" placeholder="مثال: برنامج يطبع بيانات الطالبة">
 
       <label>الكود أو الحل البرمجي</label>
-      <textarea id="studentCode">print("اسمي: ")
-print("صفي: ")
-print("أنا أتعلم البرمجة بثقة")</textarea>
+      <textarea id="studentCode" class="codebox">name = "Sara"
+print("Student name:", name)
+print("I am learning Python")</textarea>
 
       <label>الناتج بعد التشغيل</label>
-      <textarea id="resultText" class="arabic-text" placeholder="تكتب الطالبة هنا ناتج التشغيل أو تلصق وصف النتيجة"></textarea>
+      <textarea id="resultText" placeholder="تكتب الطالبة هنا ناتج التشغيل أو وصف النتيجة"></textarea>
 
-      <label>أو رفع صورة للناتج</label>
+      <label>رفع صورة للناتج أو الرسم</label>
       <input type="file" id="resultImage" accept="image/*" onchange="previewImage(event)">
-      <div id="imagePreview" style="margin-top:10px;"></div>
+      <div id="imagePreview"></div>
 
-      <label>وصف الرسم أو فكرة المشروع</label>
-      <textarea id="projectDesc" class="arabic-text" placeholder="مثال: رسمت مربعًا باستخدام أوامر forward و right"></textarea>
+      <label>شرح فكرة الحل</label>
+      <textarea id="projectDesc" placeholder="تشرح الطالبة هنا فكرة الكود أو الرسم"></textarea>
 
-      <label>ملاحظات المعلمة</label>
-      <textarea id="teacherNotes" class="arabic-text" placeholder="تكتب المعلمة ملاحظاتها هنا عند التصحيح"></textarea>
-
-      <label>تقييم الطالبة</label>
+      <label>تقييم المعلمة</label>
       <select id="evaluation">
         <option>ممتاز ⭐</option>
         <option>جيد جدًا 👍</option>
@@ -130,49 +265,72 @@ print("أنا أتعلم البرمجة بثقة")</textarea>
         <option>يحتاج تحسين ⚠️</option>
       </select>
 
-      <label>توقيع الطالبة</label>
-      <input id="studentSignature" placeholder="اكتبي اسمك كتوقيع">
+      <label>ملاحظات المعلمة</label>
+      <textarea id="teacherNotes" placeholder="تكتب المعلمة ملاحظاتها هنا"></textarea>
 
-      <div class="buttons no-print">
-        <button class="primary" onclick="preparePrint()">🖨 طباعة الحل PDF</button>
-        <button class="blue" onclick="fillExample()">✨ مثال جاهز</button>
+      <label>توقيع الطالبة</label>
+      <input id="studentSignature" placeholder="توقيع الطالبة">
+
+      <div class="btns no-print">
+        <button class="green" onclick="preparePrint()">🖨 طباعة الحل PDF</button>
+        <button class="blue" onclick="fillExample()">✨ تعبئة مثال</button>
+        <button class="gold" onclick="makeCertificate()">🏅 إنشاء شهادة</button>
         <button class="red" onclick="clearForm()">🧹 مسح النموذج</button>
+      </div>
+
+      <div id="certificateBox" class="certificate">
+        <h2>🏅 شهادة إنجاز</h2>
+        <p>تُمنح هذه الشهادة للطالبة</p>
+        <p style="font-size:26px"><b id="certName">الطالبة المبدعة</b></p>
+        <p>لإتمامها مهمة برمجية ضمن منصة VISION 360 لتعلم البرمجة.</p>
+        <p><b>نوره الصحفي - متوسطة وثانوية أم الجرم</b></p>
       </div>
     </section>
 
-    <footer>نوره الصحفي - متوسطة وثانوية أم الجرم</footer>
+    <footer>👩‍🏫 نوره الصحفي - متوسطة وثانوية أم الجرم 💻</footer>
   </main>
 
-<script>
-function preparePrint(){
-  const name = document.getElementById('studentName').value || 'طالبة';
-  document.title = 'حل مهمة برمجية - ' + name;
-  window.print();
-}
-function fillExample(){
-  document.getElementById('studentName').value = 'سارة أحمد';
-  document.getElementById('studentClass').value = 'الثالث متوسط';
-  document.getElementById('taskTitle').value = 'طباعة بيانات الطالبة';
-  document.getElementById('studentCode').value = 'name = "سارة"\nclass_name = "الثالث متوسط"\nprint("اسمي:", name)\nprint("صفي:", class_name)\nprint("أحب تعلم البرمجة")';
-  document.getElementById('resultText').value = 'اسمي: سارة\nصفي: الثالث متوسط\nأحب تعلم البرمجة';
-  document.getElementById('projectDesc').value = 'استخدمت أمر print والمتغيرات لطباعة بياناتي.';
-}
-function clearForm(){
-  ['studentName','studentClass','taskTitle','studentCode','resultText','projectDesc','teacherNotes'].forEach(id=>document.getElementById(id).value='');
-}
-function previewImage(event){
-  const preview = document.getElementById('imagePreview');
-  preview.innerHTML = '';
-  const file = event.target.files[0];
-  if(file){
-    const img = document.createElement('img');
-    img.src = URL.createObjectURL(file);
-    img.style.maxWidth = '100%';
-    img.style.borderRadius = '10px';
-    img.style.marginTop = '10px';
-    preview.appendChild(img);
-  }
-}
-</script>
+  <script>
+    function preparePrint(){
+      const name = document.getElementById('studentName').value || 'طالبة';
+      document.title = 'حل مهمة برمجية - ' + name;
+      window.print();
+    }
+
+    function previewImage(event){
+      const preview = document.getElementById('imagePreview');
+      preview.innerHTML = '';
+      const file = event.target.files[0];
+      if(file){
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        preview.appendChild(img);
+      }
+    }
+
+    function fillExample(){
+      document.getElementById('studentName').value = 'سارة أحمد';
+      document.getElementById('studentClass').value = 'الثالث متوسط';
+      document.getElementById('taskType').value = 'كود Python';
+      document.getElementById('taskTitle').value = 'طباعة بيانات الطالبة';
+      document.getElementById('studentCode').value = 'name = "Sara"\nclass_name = "Grade 9"\nprint("Student name:", name)\nprint("Class:", class_name)\nprint("Python is fun")';
+      document.getElementById('resultText').value = 'Student name: Sara\nClass: Grade 9\nPython is fun';
+      document.getElementById('projectDesc').value = 'استخدمت المتغيرات وأمر الطباعة لعرض بيانات الطالبة.';
+      document.getElementById('teacherNotes').value = 'حل منظم وواضح.';
+      document.getElementById('studentSignature').value = 'سارة أحمد';
+    }
+
+    function makeCertificate(){
+      const name = document.getElementById('studentName').value || 'الطالبة المبدعة';
+      document.getElementById('certName').innerText = name;
+      document.getElementById('certificateBox').style.display = 'block';
+    }
+
+    function clearForm(){
+      ['studentName','studentClass','taskTitle','studentCode','resultText','projectDesc','teacherNotes','studentSignature'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('imagePreview').innerHTML = '';
+      document.getElementById('certificateBox').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
